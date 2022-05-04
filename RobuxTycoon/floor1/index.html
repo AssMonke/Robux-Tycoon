@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Robux Tycoon</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    
+    <body>
+        <div id="saveTip">Game auto-saves every 30s. Every Sunday the game will reset data.</div>
+        <img id="conveyor" src="/imgs/conveyorbelt.png">
+        <button id="dispenserButton" type="submit"><img id="dispenser" src="/imgs/dispenser.png"></button>
+
+        <div id="clickRate">*1</div>
+        <div id="clickCost">R$100</div>
+        <button id="click">Click Multiplyer</button>
+        
+        <div id="noobRate">R$1:10s</div>
+        <div id="noobCost">R$15</div>
+        <div id="noobAmount">0</div>
+        <button id="noob">Noob</button>
+
+        <div id="rmanRate">R$1:1s</div>
+        <div id="rmanCost">R$100</div>
+        <div id="rmanAmount">0</div>
+        <button id="rman">Robux Man</button>
+
+        <div id="cardRate">R$10:1s</div>
+        <div id="cardCost">R$1500</div>
+        <div id="cardAmount">0</div>
+        <button id="card">Mom's Credit Card</button>
+
+        <div id="jailRate">R$50:1s</div>
+        <div id="jailCost">R$12500</div>
+        <div id="jailAmount">0</div>
+        <button id="jail">Jailbreak</button>
+
+        <div id="sharkRate">R$250:1s</div>
+        <div id="sharkCost">R$150000</div>
+        <div id="sharkAmount">0</div>
+        <button id="shark">Shark Bite</button>
+
+        <div id="dsRate">R$1500:1s</div>
+        <div id="dsCost">R$1500000</div>
+        <div id="dsAmount">0</div>
+        <button id="ds">Disaster Survival</button>
+
+        <button id="floor2">Floor 2</button>
+
+        <button id="save">Save</button>
+
+        <button id="reset">RESET</button>
+
+        <div id="codeContainer" style="visibility: hidden;">
+            <div id="codeInfo">If you have a code, then you may enter it below to claim your reward. 1 use.</div>
+            <form id="codeForm">
+                <input id="code" type="text" value="Enter Code">
+            </form>
+        </div>
+
+        <div id="confirmation">
+            <div id="conText">Are you sure you want to reset all data? This cannot be undone.</div>
+            <button id="yes">Yes</button>
+            <button id="no">No</button>
+        </div>
+
+        <div id="robux">R$0</div>
+        <div id="away">You were gone for 0s and earned R$0!</div>
+        
+        <script src="main.js" charset="utf-8"></script>
+    </body>
+</html>

@@ -1,0 +1,571 @@
+* 
+{
+    margin: 0;
+    padding: 0;
+    width: 800px;
+    height: 600px;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: black;
+    border: 0;
+    user-select: none;
+    outline: none;
+}
+
+#codeForm
+{
+    width: 100%;
+    height: 500px;
+    left: 0;
+    top: 100px;
+    position: absolute;
+    z-index: 10;
+}
+#code
+{
+    position: absolute;
+    left: 300px;
+    top: 100px;
+    width: 200px;
+    height: 35px;
+    background-color: red;
+    font-size: 30px;
+    z-index: 10;
+}
+#codeInfo
+{
+    position: absolute;
+    font-size: 40px;
+    color: red;
+    text-align: center;
+    top: 0;
+    height: 100px;
+    z-index: 10;
+}
+
+#conveyor
+{
+    width: 750px;
+    height: 100px;
+    position: absolute;
+    left: 75px;
+    top: 270px;
+    user-select: none;
+}
+
+#dispenser
+{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    top: 200px;
+    user-select: none;
+}
+#dispenserButton
+{
+    width: 100px;
+    height: 100px;
+    top: 200px;
+}
+
+#robux
+{
+    font-size: 40px;
+    color: green;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    left: 340px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#away
+{
+    font-size: 20px;
+    color: green;
+    position: absolute;
+    text-align: center;
+    top: 0px;
+    height: 60px;
+}
+
+#save
+{
+    position: absolute;
+    height: 30px;
+    width: 55px;
+    left: 25px;
+    top: 80px;
+    background-color: green;
+    transition: all 0.3s;
+    font-size: 15px;
+}
+#save:hover
+{
+    background-color: rgb(0, 75, 0);
+}
+#saveTip
+{
+    font-size: 10px;
+    color: red;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#reset
+{
+    position: absolute;
+    height: 30px;
+    width: 55px;
+    left: 25px;
+    top: 25px;
+    background-color: red;
+    transition: all 0.3s;
+    font-size: 15px;
+}
+#reset:hover
+{
+    background-color: rgb(175, 0, 0);
+}
+
+#confrimation
+{
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+#conText
+{
+    position: absolute;
+    font-size: 40px;
+    color: red;
+    text-align: center;
+    top: 0;
+    visibility: hidden;
+    z-index: 9;
+}
+#yes
+{
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    left: 230px;
+    top: 200px;
+    background-color: red;
+    transition: all 0.3s;
+    font-size: 20px;
+    visibility: hidden;
+    z-index: 9;
+}
+#yes:hover
+{
+    background-color: rgb(175, 0, 0);
+}
+#no
+{
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    left: 500px;
+    top: 200px;
+    background-color: red;
+    transition: all 0.3s;
+    font-size: 20px;
+    visibility: hidden;
+    z-index: 9;
+}
+#no:hover
+{
+    background-color: rgb(175, 0, 0);
+}
+
+#prestiege
+{
+    position: absolute;
+    height: 30px;
+    width: 55px;
+    left: 5px;
+    top: 425px;
+    background-color: red;
+    transition: all 0.3s;
+    font-size: 12px;
+}
+#prestiege:hover
+{
+    background-color: rgb(175, 0, 0);
+}
+#prestiege:active
+{
+    height: 24px;
+    width: 44px;
+    left: 10px;
+    top: 430px;
+}
+#prestiegeCost
+{
+    font-size: 15px;
+    color: red;
+    position: absolute;
+    top: 454px;
+    left: 5px;
+    width: fit-content;
+    height: fit-content;
+}
+#prestiegeRate
+{
+    font-size: 15px;
+    color: red;
+    position: absolute;
+    top: 400px;
+    left: 5px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#mine
+{
+    position: absolute;
+    height: 50px;
+    width: 75px;
+    left: 100px;
+    top: 380px;
+    background-color: red;
+    transition: all 0.3s;
+    font-size: 20px;
+}
+#mine:hover
+{
+    background-color: rgb(175, 0, 0);
+}
+#mine:active
+{
+    height: 43px;
+    width: 65px;
+    left: 105px;
+    top: 385px;
+}
+#mineCost
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 430px;
+    left: 100px;
+    width: fit-content;
+    height: fit-content;
+}
+#mineAmount
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 395px;
+    left: 180px;
+    width: fit-content;
+    height: fit-content;
+}
+#mineRate
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 350px;
+    left: 100px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#printer
+{
+    position: absolute;
+    height: 50px;
+    width: 75px;
+    left: 100px;
+    top: 500px;
+    background-color: red;
+    transition: all 0.3s;
+    font-size: 20px;
+}
+#printer:hover
+{
+    background-color: rgb(175, 0, 0);
+}
+#printer:active
+{
+    height: 43px;
+    width: 65px;
+    left: 105px;
+    top: 505px;
+}
+#printerCost
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 550px;
+    left: 100px;
+    width: fit-content;
+    height: fit-content;
+}
+#printerAmount
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 515px;
+    left: 180px;
+    width: fit-content;
+    height: fit-content;
+}
+#printerRate
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 470px;
+    left: 100px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#child
+{
+    position: absolute;
+    height: 50px;
+    width: 75px;
+    left: 300px;
+    top: 380px;
+    background-color: red;
+    transition: all 0.3s;
+    font-size: 20px;
+}
+#child:hover
+{
+    background-color: rgb(175, 0, 0);
+}
+#child:active
+{
+    height: 43px;
+    width: 65px;
+    left: 305px;
+    top: 385px;
+}
+#childCost
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 430px;
+    left: 300px;
+    width: fit-content;
+    height: fit-content;
+}
+#childAmount
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 395px;
+    left: 380px;
+    width: fit-content;
+    height: fit-content;
+}
+#childRate
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 350px;
+    left: 300px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#dominus
+{
+    position: absolute;
+    height: 50px;
+    width: 75px;
+    left: 300px;
+    top: 500px;
+    background-color: red;
+    transition: all 0.3s;
+    font-size: 18px;
+}
+#dominus:hover
+{
+    background-color: rgb(175, 0, 0);
+}
+#dominus:active
+{
+    height: 43px;
+    width: 65px;
+    left: 305px;
+    top: 505px;
+}
+#dominusCost
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 550px;
+    left: 300px;
+    width: fit-content;
+    height: fit-content;
+}
+#dominusAmount
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 515px;
+    left: 380px;
+    width: fit-content;
+    height: fit-content;
+}
+#dominusRate
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 470px;
+    left: 300px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#admin
+{
+    position: absolute;
+    height: 50px;
+    width: 75px;
+    left: 500px;
+    top: 380px;
+    background-color: red;
+    transition: all 0.3s;
+    font-size: 20px;
+}
+#admin:hover
+{
+    background-color: rgb(175, 0, 0);
+}
+#admin:active
+{
+    height: 43px;
+    width: 65px;
+    left: 505px;
+    top: 385px;
+}
+#adminCost
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 430px;
+    left: 500px;
+    width: fit-content;
+    height: fit-content;
+}
+#adminAmount
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 395px;
+    left: 580px;
+    width: fit-content;
+    height: fit-content;
+}
+#adminRate
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 350px;
+    left: 500px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#fire
+{
+    position: absolute;
+    height: 50px;
+    width: 75px;
+    left: 500px;
+    top: 500px;
+    background-color: red;
+    transition: all 0.3s;
+    font-size: 20px;
+}
+#fire:hover
+{
+    background-color: rgb(175, 0, 0);
+}
+#fire:active
+{
+    height: 43px;
+    width: 65px;
+    left: 505px;
+    top: 505px;
+}
+#fireCost
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 550px;
+    left: 500px;
+    width: fit-content;
+    height: fit-content;
+}
+#fireAmount
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 515px;
+    left: 580px;
+    width: fit-content;
+    height: fit-content;
+}
+#fireRate
+{
+    font-size: 20px;
+    color: red;
+    position: absolute;
+    top: 470px;
+    left: 500px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#floor1
+{
+    position: absolute;
+    height: 50px;
+    width: 75px;
+    left: 700px;
+    top: 380px;
+    background-color: green;
+    transition: all 0.3s;
+    font-size: 20px;
+}
+#floor1:hover
+{
+    background-color: rgb(0, 75, 0);
+}
+#floor1:active
+{
+    height: 43px;
+    width: 65px;
+    left: 705px;
+    top: 385px;
+}

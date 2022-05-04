@@ -1,0 +1,23 @@
+{
+    "name": "Robux Tycoon",
+    "description": "Live out your robux abundant fantasies, now with Robux Tycoon.",
+    "version": "0.2.0",
+    "manifest_version": 3,
+
+    "permissions": 
+    [
+        "storage"
+    ],
+
+    "icons":
+    {
+        "16": "imgs/thumbnail.PNG",
+        "48": "imgs/thumbnail.PNG",
+        "128": "imgs/thumbnail.PNG"
+    },
+    
+    "action": 
+    {
+        "default_popup": "floor1/index.html"
+    }
+  }
