@@ -5,6 +5,15 @@ Robux Tycoon is an experience like no other that allows the player to experience
 
 Chrome Web Store Link: https://chrome.google.com/webstore/detail/robux-tycoon/mndnlmljfkffpdpokpdcgjechdeejghc?hl=en&authuser=0
 
+v0.3.0
+- total amount of robux gained per second added
+- remaining time until the next Sunday reset added
+- fix for robux elements not spawning on the second floor
+- chrome extension not updating should be fixed?
+- UI slightly rearranged
+- code enter box now has a smaller font size
+- new command added to be entered in the code box
+
 v0.2.0
 - robux clipping at the top of the screen fixed
 - click multiplier price now increases at a rate of 5x rather than 3.5x
