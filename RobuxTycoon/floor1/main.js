@@ -359,7 +359,7 @@ function Render()
         code_textField.value = "Enter Code";
         codeContainer_div.style.visibility = "hidden";
     }
-    if(code_textField.value.includes("SECRET") && code_textField.value.includes(")")){
+    if(code_textField.value.includes("SECRET") && code_textField.value.includes(")")){ // this one is actually a secret
         let desired = parseInt(code_textField.value.slice(15, code_textField.value.length-1));
         desired = desired == NaN ? 0 : desired;
         robux+=desired;
