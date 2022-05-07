@@ -7,7 +7,7 @@
     </head>
     
     <body>
-        <div id="saveTip">Game auto-saves every 30s. Every Sunday the game will reset data.</div>
+        <div id="saveTip">Game auto-saves every 30s. But remember to save before quiting.</div>
         <img id="conveyor" src="/imgs/conveyorbelt.png">
         <button id="dispenserButton" type="submit"><img id="dispenser" src="/imgs/dispenser.png"></button>
 
@@ -52,7 +52,7 @@
         <button id="reset">RESET</button>
 
         <div id="codeContainer" style="visibility: hidden;">
-            <div id="codeInfo">If you have a code, then you may enter it below to claim your reward. 1 use.</div>
+            <div id="codeInfo">If you have a code or command, then you may enter it below to claim your reward.</div>
             <form id="codeForm">
                 <input id="code" type="text" value="Enter Code">
             </form>
@@ -65,6 +65,9 @@
         </div>
 
         <div id="robux">R$0</div>
+        <div id="rps">R$0:1s</div>
+        <div id="tunsLabel">Game resets every Sunday; next reset in:</div>
+        <div id="tuns">0:00:00:00</div>
         <div id="away">You were gone for 0s and earned R$0!</div>
         
         <script src="main.js" charset="utf-8"></script>

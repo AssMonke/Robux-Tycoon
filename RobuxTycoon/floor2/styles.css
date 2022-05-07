@@ -29,7 +29,7 @@
     width: 200px;
     height: 35px;
     background-color: red;
-    font-size: 30px;
+    font-size: 20px;
     z-index: 10;
 }
 #codeInfo
@@ -76,7 +76,43 @@
     position: absolute;
     text-align: center;
     top: 0px;
-    left: 340px;
+    left: 310px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#rps
+{
+    font-size: 20px;
+    color: green;
+    position: absolute;
+    text-align: center;
+    top: 45px;
+    left: 310px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#tuns
+{
+    font-size: 20px;
+    color: green;
+    position: absolute;
+    text-align: center;
+    top: 30px;
+    left: 90px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#tunsLabel
+{
+    font-size: 10px;
+    color: green;
+    position: absolute;
+    text-align: center;
+    top: 19px;
+    left: 90px;
     width: fit-content;
     height: fit-content;
 }
@@ -88,7 +124,7 @@
     position: absolute;
     text-align: center;
     top: 0px;
-    height: 60px;
+    height: 80px;
 }
 
 #save

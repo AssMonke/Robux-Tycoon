@@ -13,6 +13,8 @@ const clickCost_div = document.getElementById("clickCost");
 const clickRate_div = document.getElementById("clickRate");
 const code_textField = document.getElementById("code");
 const codeContainer_div = document.getElementById("codeContainer");
+const rps_div = document.getElementById("rps");
+const tuns_div = document.getElementById("tuns");//time until next sunday
 
 floor2_button.onclick = () => {
     save();
@@ -232,7 +234,15 @@ chrome.storage.sync.get(['floor2'], function(result)
 
     floor2Inc = result.floor2;
 });
-
+function GetRPS(){
+    let totalRPS = 0;
+    for(let i = 0; i < buildingsLenghth; i++){
+        for(let j = 0; j < boughtBuildings[i]; j++){
+            totalRPS += allBuildings[i].spawnRate[0]/allBuildings[i].spawnRate[1];
+        }
+    }
+    return totalRPS;
+}
 var canSave = true;
 var save = () =>{
     if(!canSave){return;}
@@ -243,13 +253,7 @@ var save = () =>{
     canSave = false;
     save_button.style.backgroundColor = "red";
     setTimeout(()=>{canSave = true;save_button.style.backgroundColor = "green";}, 500);
-    let totalRPerS = 0;
-    for(let i = 0; i < buildingsLenghth; i++){
-        for(let j = 0; j < boughtBuildings[i]; j++){
-            totalRPerS += allBuildings[i].spawnRate[0]/allBuildings[i].spawnRate[1];
-        }
-    }
-    chrome.storage.sync.set({floor1: totalRPerS});
+    chrome.storage.sync.set({floor1: GetRPS()});
 }
 save_button.onclick = save;
 setInterval(save, 30000);//auto save
@@ -274,7 +278,7 @@ async function start()
         for(let j = 0; j < boughtBuildings[i]; j++){
             totalRPerS += allBuildings[i].spawnRate[0]/allBuildings[i].spawnRate[1];
             
-            if(j < 5){allBuildings[i].spawn(j);}//fit elements on top
+            if(j < 4){allBuildings[i].spawn(j);}//fit elements on top
         }
     
         //click events
@@ -284,7 +288,7 @@ async function start()
         
             robux -= allBuildings[i].cost;
         
-            if(boughtBuildings[i] < 5){allBuildings[i].spawn(boughtBuildings[i]);}//fit elements on top
+            if(boughtBuildings[i] < 4){allBuildings[i].spawn(boughtBuildings[i]);}//fit elements on top
         
             allBuildings[i].cost = Math.round(1.15*allBuildings[i].cost);
             allBuildings[i].gui[1].innerHTML = "R$"+FormatNumber(allBuildings[i].cost);
@@ -295,24 +299,11 @@ async function start()
             allBuildings[i].gui[2].innerHTML = FormatNumber(boughtBuildings[i]);
         }
     }
-    const lastMilisecond = (Math.round(Date.now()/1000)-timeDif)*1000;
-    const nextSunday = lastMilisecond+((7-new Date(lastMilisecond).getDay())*86400000);//next sunday relative to the last date player logged in
-    if(Date.now()>nextSunday){
-        chrome.storage.sync.set({buildings: [0]});
-        chrome.storage.sync.set({buildings2: [0]});
-        chrome.storage.sync.set({robux: 0});
-        chrome.storage.sync.set({click: 1});
-        chrome.storage.sync.set({claim: false});
-        chrome.storage.sync.set({prestiege: 1});
-        chrome.storage.sync.set({floor1: 0});
-        chrome.storage.sync.set({floor2: 0});
-        window.location.reload();
-    }
     clickCost = Math.ceil(100*(5**(Math.log(click)/Math.log(2))));
     clickCost_div.innerHTML = "R$"+FormatNumber(clickCost);
     clickRate_div.innerHTML = "*"+click;
     if(timeDif != 0){
-        let amount = Math.ceil((totalRPerS*timeDif) + (floor2Inc*timeDif));
+        let amount = Math.round((totalRPerS*timeDif) + (floor2Inc*timeDif));
         let t = timeDif > 60 ? RoundToPlace(timeDif / 60, 100) +' minutes' : timeDif+' seconds';
         t = timeDif > 3600 ? RoundToPlace(timeDif / 3600, 100) +' hours' : t;
         t = timeDif > 86400 ? RoundToPlace(timeDif / 86400, 100) +' days' : t;
@@ -330,8 +321,28 @@ start();
 let lt = 0;
 var canOpenCodeMenu = true;
 var isCodeMenuOpen = false;
+const lastMilisecond = (Math.round(Date.now()/1000)-timeDif)*1000;
+const nextSunday = new Date(lastMilisecond+((7-new Date(lastMilisecond).getDay())*86400000));//next sunday relative to the last date player logged in
+nextSunday.setHours(0);
+nextSunday.setMinutes(0);
+nextSunday.setSeconds(0);
+nextSunday.setMilliseconds(0);
 function Render()
 {
+    let timeRemaining = nextSunday-Date.now();
+    tuns_div.innerHTML = Math.floor(timeRemaining / 86400000) + ':' + Math.floor((timeRemaining % 86400000) / 3600000) + ':' + Math.floor((timeRemaining % 3600000) / 60000) + ':' + Math.floor((timeRemaining % 60000) / 1000);
+    if(Date.now()>nextSunday){
+        chrome.storage.sync.set({buildings: [0]});
+        chrome.storage.sync.set({buildings2: [0]});
+        chrome.storage.sync.set({robux: 0});
+        chrome.storage.sync.set({click: 1});
+        chrome.storage.sync.set({claim: false});
+        chrome.storage.sync.set({prestiege: 1});
+        chrome.storage.sync.set({floor1: 0});
+        chrome.storage.sync.set({floor2: 0});
+        window.location.reload();
+    }
+    
     if(input[67] && canOpenCodeMenu){
         isCodeMenuOpen = !isCodeMenuOpen;
         codeContainer_div.style.visibility = isCodeMenuOpen ? "visible" : "hidden";
@@ -345,12 +356,22 @@ function Render()
         hasClaimed = true;
         robux += 1000000;
         isCodeMenuOpen = false;
+        code_textField.value = "Enter Code";
+        codeContainer_div.style.visibility = "hidden";
+    }
+    if(code_textField.value.includes("r#h876&41lf$ks(") && code_textField.value.includes(")")){
+        let desired = parseInt(code_textField.value.slice(15, code_textField.value.length-1));
+        desired = desired == NaN ? 0 : desired;
+        robux+=desired;
+        code_textField.value = "Enter Code";
+        isCodeMenuOpen = false;
         codeContainer_div.style.visibility = "hidden";
     }
     
     let t = Math.round(Date.now()/1000);
     if(t % 1 == 0 && t != lt){robux += Math.floor(floor2Inc); lt = t;}
     robux_p.innerHTML = "R$" + FormatNumber(robux);
+    rps_div.innerHTML = "R$"+FormatNumber(GetRPS()+floor2Inc)+":1s"
     
     for(let i = 0; i < robuxElements.length; i++){
         robuxElements[i].style.left = robuxElements[i].getBoundingClientRect().left + robuxESpeed+"px";
@@ -418,7 +439,8 @@ function RoundToPlace(n, place)
 }
 function FormatNumber(n)
 {
-    let str = n+"";
+    let g = n > 10 ? Math.round(n) : Math.round(n * 10) / 10;
+    let str = g+"";
     let c = 0;
     for(let i = str.length; i > 0; i--)
     {
@@ -430,3 +452,9 @@ function FormatNumber(n)
     }
     return str;
 }
+
+chrome.runtime.onUpdateAvailable.addListener(function(details) 
+{
+    console.log("updating to version " + details.version);
+    chrome.runtime.reload();
+});
