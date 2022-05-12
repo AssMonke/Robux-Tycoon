@@ -5,6 +5,16 @@ Robux Tycoon is an experience like no other that allows the player to experience
 
 Chrome Web Store Link: https://chrome.google.com/webstore/detail/robux-tycoon/mndnlmljfkffpdpokpdcgjechdeejghc?hl=en&authuser=0
 
+v0.4.0
+- third floor has now been added, 6 new buildings like the previous floors
+- sunday reset not resetting fixed
+- game now optimized to reduce lag from too many html robux elements
+- secret code changed
+- added another code
+- click cost increment changed from 5x to 4x
+- number formatting updated to include number names (e.g. million, billion etc.) up to vigintillion (10^63)
+- prestige cost increased to line up with the new floor
+
 v0.3.0
 - total amount of robux gained per second added
 - remaining time until the next Sunday reset added
