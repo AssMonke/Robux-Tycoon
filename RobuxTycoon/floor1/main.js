@@ -329,7 +329,7 @@ async function start()
     clickCost_div.innerHTML = "R$"+FormatNumber(clickCost);
     clickRate_div.innerHTML = "*"+click;
     if(timeDif != 0){
-        let amount = Math.round((totalRPerS*timeDif) + (floor2Inc*timeDif));
+        let amount = Math.round((totalRPerS*timeDif) + (floor2Inc*timeDif) + (floor3Inc*timeDif));
         let t = timeDif > 60 ? RoundToPlace(timeDif / 60, 100) +' minutes' : timeDif+' seconds';
         t = timeDif > 3600 ? RoundToPlace(timeDif / 3600, 100) +' hours' : t;
         t = timeDif > 86400 ? RoundToPlace(timeDif / 86400, 100) +' days' : t;
