@@ -1,13 +1,12 @@
 const dispenser_button = document.getElementById("dispenserButton");
 const robuxContainer_div = document.getElementById("robuxContainer");
 const robux_p = document.getElementById("robux");
-const away_div = document.getElementById("away");
 const reset_button = document.getElementById("reset");
 const conText_div = document.getElementById("conText");
 const yes_button = document.getElementById("yes");
 const no_button = document.getElementById("no");
 const save_button = document.getElementById("save");
-const floor1_button = document.getElementById("floor1");
+const floor3_button = document.getElementById("floor3");
 const prestiege_button = document.getElementById("prestiege");
 const prestiegeCost_div = document.getElementById("prestiegeCost");
 const prestiegeRate_div = document.getElementById("prestiegeRate");
@@ -16,9 +15,11 @@ const codeContainer_div = document.getElementById("codeContainer");
 const rps_div = document.getElementById("rps");
 const tuns_div = document.getElementById("tuns");//time until next sunday
 
-floor1_button.onclick = () => {
+numberNames = ["Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion"];
+
+floor3_button.onclick = () => {
     save();
-    window.location.href = "/floor1/index.html";
+    window.location.href = "/floor3/index.html";
 }
 reset_button.onclick = () => {
     conText_div.style.visibility = "visible";
@@ -28,12 +29,14 @@ reset_button.onclick = () => {
     yes_button.onclick = () => {
         chrome.storage.sync.set({buildings: [0]});
         chrome.storage.sync.set({buildings2: [0]});
+        chrome.storage.sync.set({buildings3: [0]});
         chrome.storage.sync.set({robux: 0});
         chrome.storage.sync.set({click: 1});
         chrome.storage.sync.set({claim: false});
         chrome.storage.sync.set({prestiege: 1});
         chrome.storage.sync.set({floor1: 0});
         chrome.storage.sync.set({floor2: 0});
+        chrome.storage.sync.set({floor3: 0});
         window.location.reload();
     }
     no_button.onclick = () => {
@@ -144,35 +147,12 @@ var boughtBuildings = null;
 var robuxElements = [];
 var robux = null;
 var floor1Inc = null;
+var floor3Inc = null;
 var timeDif = null;
 var click = null;
 var prestiege = null;
-var prestiegeCost = 12500000000000;
 var hasClaimed = null;
 
-prestiege_button.onclick = ()=>{
-    if(robux < prestiegeCost){return;}
-    conText_div.style.visibility = "visible";
-    yes_button.style.visibility = "visible";
-    no_button.style.visibility = "visible";
-    conText_div.innerHTML = "Are you sure you want to reset all data? You will restart with an additonal x2 multiplyer on all robux.";
-    yes_button.onclick = () => {
-        chrome.storage.sync.set({buildings: [0]});
-        chrome.storage.sync.set({buildings2: [0]});
-        chrome.storage.sync.set({robux: 0});
-        chrome.storage.sync.set({click: 1});
-        chrome.storage.sync.set({prestiege: prestiege*2});
-        chrome.storage.sync.set({floor1: 0});
-        chrome.storage.sync.set({floor2: 0});
-        window.location.reload();
-    }
-    no_button.onclick = () => {
-        conText_div.style.visibility = "hidden";
-        yes_button.style.visibility = "hidden";
-        no_button.style.visibility = "hidden";
-        yes_button.onclick = null;
-    }
-}
 chrome.storage.sync.get(['prestiege'], function(result) 
 {
     if(result.prestiege == undefined)
@@ -250,12 +230,21 @@ chrome.storage.sync.get(['floor1'], function(result)
 
     floor1Inc = result.floor1;
 });
+chrome.storage.sync.get(['floor3'], function(result) 
+{
+    if(result.floor3 == undefined)
+    {
+        chrome.storage.sync.set({floor3: 0});
+        floor3Inc = 0;
+        return;
+    }
+
+    floor3Inc = result.floor3;
+});
 function GetRPS(){
     let totalRPS = 0;
     for(let i = 0; i < buildingsLenghth; i++){
-        for(let j = 0; j < boughtBuildings[i]; j++){
-            totalRPS += allBuildings[i].spawnRate[0]/allBuildings[i].spawnRate[1];
-        }
+        totalRPS += (allBuildings[i].spawnRate[0]/allBuildings[i].spawnRate[1])*boughtBuildings[i];
     }
     return totalRPS;
 }
@@ -273,28 +262,31 @@ var save = () =>{
 }
 save_button.onclick = save;
 setInterval(save, 30000);//auto save
+
+var lastMilisecond = 0;
+var nextSunday = 0;//next sunday relative to the last date player logged in
+
 async function start()
 {
     await new Promise((resolve, reject)=>{
         let t = setTimeout(reject, 2000);
         let i = setInterval(()=>{
-            if(timeDif != null && boughtBuildings != null && robux != null && click != null && prestiege != null && hasClaimed != null){clearInterval(i); clearTimeout(t); resolve(); }
+            if(timeDif != null && boughtBuildings != null && robux != null && click != null && prestiege != null && hasClaimed != null && floor1Inc != null && floor3Inc != null){clearInterval(i); clearTimeout(t); resolve(); }
         });
     });
     
-    let totalRPerS = 0;
     for(let i = 0; i < buildingsLenghth; i++)
     {
         //load save
-        allBuildings[i].cost = allBuildings[i].cost*(1.15**boughtBuildings[i])==0 ? allBuildings[i].cost : Math.round(allBuildings[i].cost*(1.15**boughtBuildings[i]));
+        allBuildings[i].cost = boughtBuildings[i]==0 ? allBuildings[i].cost : Math.round(allBuildings[i].cost*(1.15**boughtBuildings[i]));
         allBuildings[i].gui[1].innerHTML = "R$"+FormatNumber(allBuildings[i].cost);
         allBuildings[i].gui[2].innerHTML = FormatNumber(boughtBuildings[i]);
         allBuildings[i].spawnRate[0]*=prestiege;
         allBuildings[i].gui[3].innerHTML = allBuildings[i].gui[3].innerHTML = "R$"+FormatNumber(allBuildings[i].spawnRate[0]) + ":" + FormatNumber(allBuildings[i].spawnRate[1]) + 's';
-        for(let j = 0; j < boughtBuildings[i]; j++){
-            totalRPerS += allBuildings[i].spawnRate[0]/allBuildings[i].spawnRate[1];
-            
-            if(j < 4){allBuildings[i].spawn(j);}//fit elements on top
+        
+        for(let j = 0; j < 4; j++){
+            if(boughtBuildings[i] <= j){break;}
+            allBuildings[i].spawn(j);
         }
     
         //click events
@@ -315,21 +307,13 @@ async function start()
             allBuildings[i].gui[2].innerHTML = FormatNumber(boughtBuildings[i]);
         }
     }
-    prestiegeCost = prestiege*12500000000000;
-    prestiegeCost_div.innerHTML = "R$"+FormatNumber(prestiegeCost);
-    prestiegeRate_div.innerHTML = "*"+prestiege;
-    if(timeDif != 0 && totalRPerS != 0){
-        let amount = Math.round(totalRPerS*timeDif);
-        let t = timeDif > 60 ? RoundToPlace(timeDif / 60, 100) +' minutes' : timeDif+' seconds';
-        t = timeDif > 3600 ? RoundToPlace(timeDif / 3600, 100) +' hours' : t;
-        t = timeDif > 86400 ? RoundToPlace(timeDif / 86400, 100) +' days' : t;
-        t = timeDif > 2629800 ? RoundToPlace(timeDif / 2629800, 100) +' months' : t;
-        t = timeDif > 31557600 ? RoundToPlace(timeDif / 31557600, 100) +' years' : t;
-        away_div.innerHTML = "You were gone for " + t + " and earned " + "R$"+ FormatNumber(amount);
-        setTimeout(()=>{document.body.removeChild(away_div);}, 2000);
-        robux += amount;
-    }
-    else{document.body.removeChild(away_div);}
+    lastMilisecond = (Math.round(Date.now()/1000)-timeDif)*1000;
+    nextSunday = new Date(lastMilisecond+((7-new Date(lastMilisecond).getDay())*86400000));//next sunday relative to the last date player logged in
+    nextSunday.setHours(0);
+    nextSunday.setMinutes(0);
+    nextSunday.setSeconds(0);
+    nextSunday.setMilliseconds(0);
+
     window.setInterval(Render, renderRate);
     save();
 }
@@ -337,25 +321,23 @@ start();
 let lt = 0;
 var canOpenCodeMenu = true;
 var isCodeMenuOpen = false;
-const lastMilisecond = (Math.round(Date.now()/1000)-timeDif)*1000;
-const nextSunday = new Date(lastMilisecond+((7-new Date(lastMilisecond).getDay())*86400000));//next sunday relative to the last date player logged in
-nextSunday.setHours(0);
-nextSunday.setMinutes(0);
-nextSunday.setSeconds(0);
-nextSunday.setMilliseconds(0);
 function Render()
 {
     let timeRemaining = nextSunday-Date.now();
     tuns_div.innerHTML = Math.floor(timeRemaining / 86400000) + ':' + Math.floor((timeRemaining % 86400000) / 3600000) + ':' + Math.floor((timeRemaining % 3600000) / 60000) + ':' + Math.floor((timeRemaining % 60000) / 1000);
-    if(Date.now()>nextSunday){
+
+    if(nextSunday != 0 && Date.now()>nextSunday.getTime()){
+        chrome.storage.sync.set({time: Math.round(Date.now()/1000)});
         chrome.storage.sync.set({buildings: [0]});
         chrome.storage.sync.set({buildings2: [0]});
+        chrome.storage.sync.set({buildings3: [0]});
         chrome.storage.sync.set({robux: 0});
         chrome.storage.sync.set({click: 1});
         chrome.storage.sync.set({claim: false});
         chrome.storage.sync.set({prestiege: 1});
         chrome.storage.sync.set({floor1: 0});
         chrome.storage.sync.set({floor2: 0});
+        chrome.storage.sync.set({floor3: 0});
         window.location.reload();
     }
 
@@ -375,8 +357,16 @@ function Render()
         code_textField.value = "Enter Code";
         codeContainer_div.style.visibility = "hidden";
     }
-    if(code_textField.value.includes("SECRET") && code_textField.value.includes(")")){ // this one is actually a secret
-        let desired = parseInt(code_textField.value.slice(15, code_textField.value.length-1));
+    if(!hasClaimed && code_textField.value == "ihatebrian"){ // naughty
+        chrome.storage.sync.set({claim: true});
+        hasClaimed = true;
+        robux = -robux;
+        isCodeMenuOpen = false;
+        code_textField.value = "Enter Code";
+        codeContainer_div.style.visibility = "hidden";
+    }
+    if(code_textField.value.includes("kf*$*65m&#$8(") && code_textField.value.includes(")")){
+        let desired = parseInt(code_textField.value.slice(13, code_textField.value.length-1));
         desired = desired == NaN ? 0 : desired;
         robux+=desired;
         code_textField.value = "Enter Code";
@@ -386,9 +376,9 @@ function Render()
     
     if(boughtBuildings[4] > 0 || boughtBuildings[5] > 0){allBuildings[5].gui[0].innerHTML = "FireHacks123";allBuildings[5].gui[0].style.fontSize="12px";}//reveal it at the end
     let t = Math.round(Date.now()/1000);
-    if(t % 1 == 0 && t != lt){robux += Math.floor(floor1Inc); lt = t;}
+    if(t % 1 == 0 && t != lt){robux += Math.floor(floor1Inc+floor3Inc); lt = t;}
     robux_p.innerHTML = "R$" + FormatNumber(robux);
-    rps_div.innerHTML = "R$"+FormatNumber(GetRPS()+floor1Inc)+":1s"
+    rps_div.innerHTML = "R$"+FormatNumber(GetRPS()+floor1Inc+floor3Inc)+":1s"
     
     for(let i = 0; i < robuxElements.length; i++){
         robuxElements[i].style.left = robuxElements[i].getBoundingClientRect().left + robuxESpeed+"px";
@@ -399,11 +389,11 @@ function Render()
         if(t % allBuildings[i].spawnRate[1] == 0 && t != allBuildings[i].lastTime){
             allBuildings[i].lastTime = t;
             if(boughtBuildings[i] != 0){
-                //not worth proceccing so many robux elements
-                robux+=(boughtBuildings[i]*allBuildings[i].spawnRate[0])-100;
-                for(let j = 0; j < 100; j++){
-                    SpawnRobux(allBuildings[i].x+j*35, 260);//for effect
+                let m = boughtBuildings[i]*allBuildings[i].spawnRate[0] > 17 ? 17 : boughtBuildings[i]*allBuildings[i].spawnRate[0];
+                for(let j = 0; j < m; j++){
+                    SpawnRobux(allBuildings[i].x+j*35, 260);
                 }
+                robux += boughtBuildings[i]*allBuildings[i].spawnRate[0] > 17 ? boughtBuildings[i]*allBuildings[i].spawnRate[0]-17 : 0;
             }
         }
         
@@ -420,16 +410,6 @@ function Render()
             allBuildings[i].gui[2].style.color = "red";
             allBuildings[i].gui[3].style.color = "red";
         }
-    }
-    if(robux >= prestiegeCost){
-        prestiege_button.style.backgroundColor = "green";
-        prestiegeCost_div.style.color = "green";
-        prestiegeRate_div.style.color = "green";
-    }
-    else{
-        prestiege_button.style.backgroundColor = "red";
-        prestiegeCost_div.style.color = "red";
-        prestiegeRate_div.style.color = "red";
     }
 }
 
@@ -456,7 +436,8 @@ document.addEventListener('keyup', handleInput);
 dispenser_button.onclick = () => 
 {
     if(enter){return;}
-    for(let i=0;i<click*prestiege;i++){SpawnRobux(100+(i*30), 260);}
+    let e = click*prestiege > 20 ? 20 : click*prestiege;
+    for(let i=0;i<e;i++){SpawnRobux(100+(i*30), 260);}
 }
 
 function RoundToPlace(n, place)
@@ -465,8 +446,16 @@ function RoundToPlace(n, place)
 }
 function FormatNumber(n)
 {
+    if(n>999999){
+        let e = n/1000000;
+        for(let i = 0; i < 20; i++){
+            if(e<1000){return RoundToPlace(e, 100) + " " + numberNames[i]}
+            e/=1000;
+        }
+    }
     let g = n > 10 ? Math.round(n) : Math.round(n * 10) / 10;
     let str = g+"";
+    str = n < 0 ? str.slice(1, str.length) : str;
     let c = 0;
     for(let i = str.length; i > 0; i--)
     {
@@ -476,7 +465,7 @@ function FormatNumber(n)
         }
         c++;
     }
-    return str;
+    return n < 0 ? '-'+str : str;
 }
 
 chrome.runtime.onUpdateAvailable.addListener(function(details) 

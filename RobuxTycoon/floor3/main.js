@@ -1,31 +1,31 @@
 const dispenser_button = document.getElementById("dispenserButton");
 const robuxContainer_div = document.getElementById("robuxContainer");
 const robux_p = document.getElementById("robux");
-const away_div = document.getElementById("away");
 const reset_button = document.getElementById("reset");
 const conText_div = document.getElementById("conText");
 const yes_button = document.getElementById("yes");
 const no_button = document.getElementById("no");
 const save_button = document.getElementById("save");
-const floor2_button = document.getElementById("floor2");
-const click_button = document.getElementById("click");
-const clickCost_div = document.getElementById("clickCost");
-const clickRate_div = document.getElementById("clickRate");
+const floor1_button = document.getElementById("floor1");
+const prestiege_button = document.getElementById("prestiege");
+const prestiegeCost_div = document.getElementById("prestiegeCost");
+const prestiegeRate_div = document.getElementById("prestiegeRate");
 const code_textField = document.getElementById("code");
 const codeContainer_div = document.getElementById("codeContainer");
 const rps_div = document.getElementById("rps");
 const tuns_div = document.getElementById("tuns");//time until next sunday
 
-const numberNames = ["Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion"];
+numberNames = ["Million", "Billion", "Trillion", "Quadrillion", "Quintillion", "Sextillion", "Septillion", "Octillion", "Nonillion", "Decillion", "Undecillion", "Duodecillion", "Tredecillion", "Quattuordecillion", "Quindecillion", "Sexdecillion", "Septendecillion", "Octodecillion", "Novemdecillion", "Vigintillion"];
 
-floor2_button.onclick = () => {
+floor1_button.onclick = () => {
     save();
-    window.location.href = "/floor2/index.html";
+    window.location.href = "/floor1/index.html";
 }
 reset_button.onclick = () => {
     conText_div.style.visibility = "visible";
     yes_button.style.visibility = "visible";
     no_button.style.visibility = "visible";
+    conText_div.innerHTML = "Are you sure you want to reset all data? This cannot be undone.";
     yes_button.onclick = () => {
         chrome.storage.sync.set({buildings: [0]});
         chrome.storage.sync.set({buildings2: [0]});
@@ -57,11 +57,11 @@ document.addEventListener('keyup', handleInput);
 
 const allBuildings = 
 [
-    { x: 100, lastTime: 0, spawnRate: [1, 10], cost: 15, gui: [ document.getElementById("noob"), document.getElementById("noobCost"), document.getElementById("noobAmount"), document.getElementById("noobRate")], spawn: (offset) => 
+    { x: 100, lastTime: 0, spawnRate: [425000000, 1], cost: 150000000000000, gui: [ document.getElementById("f31"), document.getElementById("f31Cost"), document.getElementById("f31Amount"), document.getElementById("f31Rate")], spawn: (offset) => 
         {
             let e = document.createElement('img');
             e.style.position = "absolute";
-            e.src = "/imgs/noob.png";
+            e.src = "/imgs/f31.png";
             e.style.width = "70px";
             e.style.height = "70px";
             e.style.left = "100px";//x
@@ -71,11 +71,11 @@ const allBuildings =
         } 
     },
 
-    { x: 200, lastTime: 0, spawnRate: [1, 1], cost: 100, gui: [ document.getElementById("rman"), document.getElementById("rmanCost"), document.getElementById("rmanAmount"), document.getElementById("rmanRate")], spawn: (offset) => 
+    { x: 200, lastTime: 0, spawnRate: [3000000000, 1], cost: 2000000000000000, gui: [ document.getElementById("f32"), document.getElementById("f32Cost"), document.getElementById("f32Amount"), document.getElementById("f32Rate")], spawn: (offset) => 
         {
             let e = document.createElement('img');
             e.style.position = "absolute";
-            e.src = "/imgs/thumbnail.PNG";
+            e.src = "/imgs/f32.png";
             e.style.width = "70px";
             e.style.height = "70px";
             e.style.left = "200px";//x
@@ -85,11 +85,11 @@ const allBuildings =
         } 
     },
 
-    { x: 300, lastTime: 0, spawnRate: [10, 1], cost: 1500, gui: [ document.getElementById("card"), document.getElementById("cardCost"), document.getElementById("cardAmount"), document.getElementById("cardRate")], spawn: (offset) => 
+    { x: 300, lastTime: 0, spawnRate: [20000000000, 1], cost: 25000000000000000, gui: [ document.getElementById("f33"), document.getElementById("f33Cost"), document.getElementById("f33Amount"), document.getElementById("f33Rate")], spawn: (offset) => 
         {
             let e = document.createElement('img');
             e.style.position = "absolute";
-            e.src = "/imgs/creditcard.png";
+            e.src = "/imgs/f33.png";
             e.style.width = "70px";
             e.style.height = "70px";
             e.style.left = "300px";//x
@@ -99,11 +99,11 @@ const allBuildings =
         } 
     },
 
-    { x: 400, lastTime: 0, spawnRate: [50, 1], cost: 12500, gui: [ document.getElementById("jail"), document.getElementById("jailCost"), document.getElementById("jailAmount"), document.getElementById("jailRate")], spawn: (offset) => 
+    { x: 400, lastTime: 0, spawnRate: [150000000000, 1], cost: 300000000000000000, gui: [ document.getElementById("f34"), document.getElementById("f34Cost"), document.getElementById("f34Amount"), document.getElementById("f34Rate")], spawn: (offset) => 
         {
             let e = document.createElement('img');
             e.style.position = "absolute";
-            e.src = "/imgs/jailbreak.png";
+            e.src = "/imgs/f34.png";
             e.style.width = "70px";
             e.style.height = "70px";
             e.style.left = "400px";//x
@@ -113,11 +113,11 @@ const allBuildings =
         } 
     },
 
-    { x: 500, lastTime: 0, spawnRate: [250, 1], cost: 150000, gui: [ document.getElementById("shark"), document.getElementById("sharkCost"), document.getElementById("sharkAmount"), document.getElementById("sharkRate")], spawn: (offset) => 
+    { x: 500, lastTime: 0, spawnRate: [1000000000000, 1], cost: 70000000000000000000, gui: [ document.getElementById("f35"), document.getElementById("f35Cost"), document.getElementById("f35Amount"), document.getElementById("f35Rate")], spawn: (offset) => 
         {
             let e = document.createElement('img');
             e.style.position = "absolute";
-            e.src = "/imgs/shark.png";
+            e.src = "/imgs/f35.png";
             e.style.width = "70px";
             e.style.height = "70px";
             e.style.left = "500px";//x
@@ -127,11 +127,11 @@ const allBuildings =
         } 
     },
 
-    { x: 600, lastTime: 0, spawnRate: [1500, 1], cost: 1500000, gui: [ document.getElementById("ds"), document.getElementById("dsCost"), document.getElementById("dsAmount"), document.getElementById("dsRate")], spawn: (offset) => 
+    { x: 600, lastTime: 0, spawnRate: [10000000000000, 1], cost: 10000000000000000000000, gui: [ document.getElementById("f36"), document.getElementById("f36Cost"), document.getElementById("f36Amount"), document.getElementById("f36Rate")], spawn: (offset) => 
         {
             let e = document.createElement('img');
             e.style.position = "absolute";
-            e.src = "/imgs/tsunami.png";
+            e.src = "/imgs/f36.png";
             e.style.width = "70px";
             e.style.height = "70px";
             e.style.left = "600px";//x
@@ -146,32 +146,49 @@ const buildingsLenghth = allBuildings.length;
 var boughtBuildings = null;
 var robuxElements = [];
 var robux = null;
+var floor1Inc = null;
 var floor2Inc = null;
-var floor3Inc = null;
 var timeDif = null;
 var click = null;
-var clickCost = 100;
 var prestiege = null;
+var prestiegeCost = 15000000000000000000000;
 var hasClaimed = null;
 
-click_button.onclick = () => {
-    if(robux < clickCost){return;}
-    click*=2;
-    robux -= clickCost;
-    clickCost=Math.ceil(4*clickCost);
-    clickCost_div.innerHTML = "R$"+FormatNumber(clickCost);
-    clickRate_div.innerHTML = "*"+click;
-}
-chrome.storage.sync.get(['click'], function(result) 
-{
-    if(result.click == undefined)
-    {
+prestiege_button.onclick = ()=>{
+    if(robux < prestiegeCost){return;}
+    conText_div.style.visibility = "visible";
+    yes_button.style.visibility = "visible";
+    no_button.style.visibility = "visible";
+    conText_div.innerHTML = "Are you sure you want to reset all data? You will restart with an additonal x2 multiplyer on all robux.";
+    yes_button.onclick = () => {
+        chrome.storage.sync.set({buildings: [0]});
+        chrome.storage.sync.set({buildings2: [0]});
+        chrome.storage.sync.set({buildings3: [0]});
+        chrome.storage.sync.set({robux: 0});
         chrome.storage.sync.set({click: 1});
-        click = 1;
+        chrome.storage.sync.set({prestiege: prestiege*2});
+        chrome.storage.sync.set({floor1: 0});
+        chrome.storage.sync.set({floor2: 0});
+        chrome.storage.sync.set({floor3: 0});
+        window.location.reload();
+    }
+    no_button.onclick = () => {
+        conText_div.style.visibility = "hidden";
+        yes_button.style.visibility = "hidden";
+        no_button.style.visibility = "hidden";
+        yes_button.onclick = null;
+    }
+}
+chrome.storage.sync.get(['prestiege'], function(result) 
+{
+    if(result.prestiege == undefined)
+    {
+        chrome.storage.sync.set({prestiege: 1});
+        prestiege = 1;
         return;
     }
 
-    click = result.click;
+    prestiege = result.prestiege;
 });
 chrome.storage.sync.get(['claim'], function(result) 
 {
@@ -184,16 +201,16 @@ chrome.storage.sync.get(['claim'], function(result)
 
     hasClaimed = result.claim;
 });
-chrome.storage.sync.get(['prestiege'], function(result) 
+chrome.storage.sync.get(['click'], function(result) 
 {
-    if(result.prestiege == undefined)
+    if(result.click == undefined)
     {
-        chrome.storage.sync.set({prestiege: 1});
-        prestiege = 1;
+        chrome.storage.sync.set({click: 1});
+        click = 1;
         return;
     }
 
-    prestiege = result.prestiege;
+    click = result.click;
 });
 chrome.storage.sync.get(['robux'], function(result) 
 {
@@ -206,16 +223,16 @@ chrome.storage.sync.get(['robux'], function(result)
 
     robux = result.robux;
 });
-chrome.storage.sync.get(['buildings'], function(result) 
+chrome.storage.sync.get(['buildings3'], function(result) 
 {
-    if(result.buildings == undefined || result.buildings.length < 2)
+    if(result.buildings3 == undefined || result.buildings3.length < 2)
     {
-        chrome.storage.sync.set({buildings: [0, 0, 0, 0, 0, 0]});
+        chrome.storage.sync.set({buildings3: [0, 0, 0, 0, 0, 0]});
         boughtBuildings = [0, 0, 0, 0, 0, 0];
         return;
     }
 
-    boughtBuildings = result.buildings;
+    boughtBuildings = result.buildings3;
 });
 chrome.storage.sync.get(['time'], function(result) 
 {
@@ -228,6 +245,17 @@ chrome.storage.sync.get(['time'], function(result)
 
     timeDif = Math.round(Date.now()/1000) - result.time;
 });
+chrome.storage.sync.get(['floor1'], function(result) 
+{
+    if(result.floor1 == undefined)
+    {
+        chrome.storage.sync.set({floor1: 0});
+        floor1Inc = 0;
+        return;
+    }
+
+    floor1Inc = result.floor1;
+});
 chrome.storage.sync.get(['floor2'], function(result) 
 {
     if(result.floor2 == undefined)
@@ -239,17 +267,6 @@ chrome.storage.sync.get(['floor2'], function(result)
 
     floor2Inc = result.floor2;
 });
-chrome.storage.sync.get(['floor3'], function(result) 
-{
-    if(result.floor3 == undefined)
-    {
-        chrome.storage.sync.set({floor3: 0});
-        floor3Inc = 0;
-        return;
-    }
-
-    floor3Inc = result.floor3;
-});
 function GetRPS(){
     let totalRPS = 0;
     for(let i = 0; i < buildingsLenghth; i++){
@@ -260,14 +277,14 @@ function GetRPS(){
 var canSave = true;
 var save = () =>{
     if(!canSave){return;}
-    chrome.storage.sync.set({buildings: boughtBuildings});
+    chrome.storage.sync.set({buildings3: boughtBuildings});
     chrome.storage.sync.set({robux: robux});
-    chrome.storage.sync.set({click: click});
+    chrome.storage.sync.set({prestiege: prestiege});
     chrome.storage.sync.set({time: Math.round(Date.now()/1000)});
     canSave = false;
     save_button.style.backgroundColor = "red";
     setTimeout(()=>{canSave = true;save_button.style.backgroundColor = "green";}, 500);
-    chrome.storage.sync.set({floor1: GetRPS()});
+    chrome.storage.sync.set({floor3: GetRPS()});
 }
 save_button.onclick = save;
 setInterval(save, 30000);//auto save
@@ -280,11 +297,10 @@ async function start()
     await new Promise((resolve, reject)=>{
         let t = setTimeout(reject, 2000);
         let i = setInterval(()=>{
-            if(timeDif != null && boughtBuildings != null && robux != null && click != null && prestiege != null && hasClaimed != null && floor2Inc != null && floor3Inc != null){clearInterval(i); clearTimeout(t); resolve(); }
+            if(timeDif != null && boughtBuildings != null && robux != null && click != null && prestiege != null && hasClaimed != null && floor2Inc != null && floor1Inc != null){clearInterval(i); clearTimeout(t); resolve(); }
         });
     });
     
-    let totalRPerS = 0;
     for(let i = 0; i < buildingsLenghth; i++)
     {
         //load save
@@ -294,7 +310,6 @@ async function start()
         allBuildings[i].spawnRate[0]*=prestiege;
         allBuildings[i].gui[3].innerHTML = allBuildings[i].gui[3].innerHTML = "R$"+FormatNumber(allBuildings[i].spawnRate[0]) + ":" + FormatNumber(allBuildings[i].spawnRate[1]) + 's';
         
-        totalRPerS += (allBuildings[i].spawnRate[0]/allBuildings[i].spawnRate[1])*boughtBuildings[i];
         for(let j = 0; j < 4; j++){
             if(boughtBuildings[i] <= j){break;}
             allBuildings[i].spawn(j);
@@ -324,22 +339,10 @@ async function start()
     nextSunday.setMinutes(0);
     nextSunday.setSeconds(0);
     nextSunday.setMilliseconds(0);
-    
-    clickCost = Math.ceil(100*(4**(Math.log(click)/Math.log(2))));
-    clickCost_div.innerHTML = "R$"+FormatNumber(clickCost);
-    clickRate_div.innerHTML = "*"+click;
-    if(timeDif != 0){
-        let amount = Math.round((totalRPerS*timeDif) + (floor2Inc*timeDif));
-        let t = timeDif > 60 ? RoundToPlace(timeDif / 60, 100) +' minutes' : timeDif+' seconds';
-        t = timeDif > 3600 ? RoundToPlace(timeDif / 3600, 100) +' hours' : t;
-        t = timeDif > 86400 ? RoundToPlace(timeDif / 86400, 100) +' days' : t;
-        t = timeDif > 2629800 ? RoundToPlace(timeDif / 2629800, 100) +' months' : t;
-        t = timeDif > 31557600 ? RoundToPlace(timeDif / 31557600, 100) +' years' : t;
-        away_div.innerHTML = "You were gone for " + t + " and earned " + "R$"+ FormatNumber(amount);
-        setTimeout(()=>{document.body.removeChild(away_div);}, 2000);
-        robux += amount;
-    }
-    else{document.body.removeChild(away_div);}
+
+    prestiegeCost = prestiege*15000000000000000000000;
+    prestiegeCost_div.innerHTML = "R$"+FormatNumber(prestiegeCost);
+    prestiegeRate_div.innerHTML = "*"+prestiege;
     window.setInterval(Render, renderRate);
     save();
 }
@@ -351,7 +354,7 @@ function Render()
 {
     let timeRemaining = nextSunday-Date.now();
     tuns_div.innerHTML = Math.floor(timeRemaining / 86400000) + ':' + Math.floor((timeRemaining % 86400000) / 3600000) + ':' + Math.floor((timeRemaining % 3600000) / 60000) + ':' + Math.floor((timeRemaining % 60000) / 1000);
-    
+
     if(nextSunday != 0 && Date.now()>nextSunday.getTime()){
         chrome.storage.sync.set({time: Math.round(Date.now()/1000)});
         chrome.storage.sync.set({buildings: [0]});
@@ -400,18 +403,23 @@ function Render()
         codeContainer_div.style.visibility = "hidden";
     }
     
+    if(boughtBuildings[0] > 0){allBuildings[0].gui[0].innerHTML = "Glitch Exploiter";allBuildings[0].gui[0].style.fontSize="16px";}//hidden
+    if(boughtBuildings[1] > 0){allBuildings[1].gui[0].innerHTML = "Labor Camp";allBuildings[1].gui[0].style.fontSize="18px";}//hidden
+    if(boughtBuildings[2] > 0){allBuildings[2].gui[0].innerHTML = "Robux Plantation";allBuildings[2].gui[0].style.fontSize="16px";}//hidden
+    if(boughtBuildings[3] > 0){allBuildings[3].gui[0].innerHTML = "Robux Counterfeiter";allBuildings[3].gui[0].style.fontSize="12px";}//hidden
+    if(boughtBuildings[4] > 0){allBuildings[4].gui[0].innerHTML = "Harry";allBuildings[4].gui[0].style.fontSize="20px";}//hidden
+    if(boughtBuildings[5] > 0){allBuildings[5].gui[0].innerHTML = "Nugget";allBuildings[5].gui[0].style.fontSize="20px";}//hidden
     let t = Math.round(Date.now()/1000);
-    if(t % 1 == 0 && t != lt){robux += Math.floor(floor2Inc+floor3Inc); lt = t;}
+    if(t % 1 == 0 && t != lt){robux += Math.floor(floor1Inc+floor2Inc); lt = t;}
     robux_p.innerHTML = "R$" + FormatNumber(robux);
-    rps_div.innerHTML = "R$"+FormatNumber(GetRPS()+floor2Inc+floor3Inc)+":1s"
+    rps_div.innerHTML = "R$"+FormatNumber(GetRPS()+floor1Inc+floor2Inc)+":1s"
     
     for(let i = 0; i < robuxElements.length; i++){
         robuxElements[i].style.left = robuxElements[i].getBoundingClientRect().left + robuxESpeed+"px";
         if(parseInt(robuxElements[i].style.left) > 800){ document.body.removeChild(robuxElements[i]); robuxElements.splice(i, 1); robux++;}
     }
 
-    for(let i = 0; i < buildingsLenghth; i++)
-    {
+    for(let i = 0; i < buildingsLenghth; i++){
         if(t % allBuildings[i].spawnRate[1] == 0 && t != allBuildings[i].lastTime){
             allBuildings[i].lastTime = t;
             if(boughtBuildings[i] != 0){
@@ -437,15 +445,15 @@ function Render()
             allBuildings[i].gui[3].style.color = "red";
         }
     }
-    if(robux >= clickCost){
-        click_button.style.backgroundColor = "green";
-        clickCost_div.style.color = "green";
-        clickRate_div.style.color = "green";
+    if(robux >= prestiegeCost){
+        prestiege_button.style.backgroundColor = "green";
+        prestiegeCost_div.style.color = "green";
+        prestiegeRate_div.style.color = "green";
     }
     else{
-        click_button.style.backgroundColor = "red";
-        clickCost_div.style.color = "red";
-        clickRate_div.style.color = "red";
+        prestiege_button.style.backgroundColor = "red";
+        prestiegeCost_div.style.color = "red";
+        prestiegeRate_div.style.color = "red";
     }
 }
 
@@ -464,9 +472,14 @@ function SpawnRobux(x, y)
     robuxElements.push(r);
 }
 
+var enter = false;
+var handleInput = (event) => { enter = event.keyCode == 13; }
+document.addEventListener('keydown', handleInput);
+document.addEventListener('keyup', handleInput);
+
 dispenser_button.onclick = () => 
 {
-    if(input[13]){return;}
+    if(enter){return;}
     let e = click*prestiege > 20 ? 20 : click*prestiege;
     for(let i=0;i<e;i++){SpawnRobux(100+(i*30), 260);}
 }
@@ -475,7 +488,6 @@ function RoundToPlace(n, place)
 {
     return Math.round(n*place)/place;
 }
-
 function FormatNumber(n)
 {
     if(n>999999){

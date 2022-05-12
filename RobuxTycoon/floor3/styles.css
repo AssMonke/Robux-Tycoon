@@ -212,7 +212,50 @@
     background-color: rgb(175, 0, 0);
 }
 
-#mine
+#prestiege
+{
+    position: absolute;
+    height: 30px;
+    width: 55px;
+    left: 5px;
+    top: 425px;
+    background-color: red;
+    transition: all 0.3s;
+    font-size: 12px;
+}
+#prestiege:hover
+{
+    background-color: rgb(175, 0, 0);
+}
+#prestiege:active
+{
+    height: 24px;
+    width: 44px;
+    left: 10px;
+    top: 430px;
+}
+#prestiegeCost
+{
+    font-size: 15px;
+    color: red;
+    position: absolute;
+    top: 454px;
+    left: 5px;
+    width: fit-content;
+    height: fit-content;
+}
+#prestiegeRate
+{
+    font-size: 15px;
+    color: red;
+    position: absolute;
+    top: 400px;
+    left: 5px;
+    width: fit-content;
+    height: fit-content;
+}
+
+#f31
 {
     position: absolute;
     height: 50px;
@@ -223,18 +266,18 @@
     transition: all 0.3s;
     font-size: 20px;
 }
-#mine:hover
+#f31:hover
 {
     background-color: rgb(175, 0, 0);
 }
-#mine:active
+#f31:active
 {
     height: 43px;
     width: 65px;
     left: 105px;
     top: 385px;
 }
-#mineCost
+#f31Cost
 {
     font-size: 20px;
     color: red;
@@ -244,7 +287,7 @@
     width: fit-content;
     height: fit-content;
 }
-#mineAmount
+#f31Amount
 {
     font-size: 20px;
     color: red;
@@ -254,7 +297,7 @@
     width: fit-content;
     height: fit-content;
 }
-#mineRate
+#f31Rate
 {
     font-size: 20px;
     color: red;
@@ -265,7 +308,7 @@
     height: fit-content;
 }
 
-#printer
+#f32
 {
     position: absolute;
     height: 50px;
@@ -276,18 +319,18 @@
     transition: all 0.3s;
     font-size: 20px;
 }
-#printer:hover
+#f32:hover
 {
     background-color: rgb(175, 0, 0);
 }
-#printer:active
+#f32:active
 {
     height: 43px;
     width: 65px;
     left: 105px;
     top: 505px;
 }
-#printerCost
+#f32Cost
 {
     font-size: 20px;
     color: red;
@@ -297,7 +340,7 @@
     width: fit-content;
     height: fit-content;
 }
-#printerAmount
+#f32Amount
 {
     font-size: 20px;
     color: red;
@@ -307,7 +350,7 @@
     width: fit-content;
     height: fit-content;
 }
-#printerRate
+#f32Rate
 {
     font-size: 20px;
     color: red;
@@ -318,7 +361,7 @@
     height: fit-content;
 }
 
-#child
+#f33
 {
     position: absolute;
     height: 50px;
@@ -329,18 +372,18 @@
     transition: all 0.3s;
     font-size: 20px;
 }
-#child:hover
+#f33:hover
 {
     background-color: rgb(175, 0, 0);
 }
-#child:active
+#f33:active
 {
     height: 43px;
     width: 65px;
     left: 305px;
     top: 385px;
 }
-#childCost
+#f33Cost
 {
     font-size: 20px;
     color: red;
@@ -350,7 +393,7 @@
     width: fit-content;
     height: fit-content;
 }
-#childAmount
+#f33Amount
 {
     font-size: 20px;
     color: red;
@@ -360,7 +403,7 @@
     width: fit-content;
     height: fit-content;
 }
-#childRate
+#f33Rate
 {
     font-size: 20px;
     color: red;
@@ -371,7 +414,7 @@
     height: fit-content;
 }
 
-#dominus
+#f34
 {
     position: absolute;
     height: 50px;
@@ -382,18 +425,18 @@
     transition: all 0.3s;
     font-size: 18px;
 }
-#dominus:hover
+#f34:hover
 {
     background-color: rgb(175, 0, 0);
 }
-#dominus:active
+#f34:active
 {
     height: 43px;
     width: 65px;
     left: 305px;
     top: 505px;
 }
-#dominusCost
+#f34Cost
 {
     font-size: 20px;
     color: red;
@@ -403,7 +446,7 @@
     width: fit-content;
     height: fit-content;
 }
-#dominusAmount
+#f34Amount
 {
     font-size: 20px;
     color: red;
@@ -413,7 +456,7 @@
     width: fit-content;
     height: fit-content;
 }
-#dominusRate
+#f34Rate
 {
     font-size: 20px;
     color: red;
@@ -424,7 +467,7 @@
     height: fit-content;
 }
 
-#admin
+#f35
 {
     position: absolute;
     height: 50px;
@@ -435,18 +478,18 @@
     transition: all 0.3s;
     font-size: 20px;
 }
-#admin:hover
+#f35:hover
 {
     background-color: rgb(175, 0, 0);
 }
-#admin:active
+#f35:active
 {
     height: 43px;
     width: 65px;
     left: 505px;
     top: 385px;
 }
-#adminCost
+#f35Cost
 {
     font-size: 20px;
     color: red;
@@ -456,7 +499,7 @@
     width: fit-content;
     height: fit-content;
 }
-#adminAmount
+#f35Amount
 {
     font-size: 20px;
     color: red;
@@ -466,7 +509,7 @@
     width: fit-content;
     height: fit-content;
 }
-#adminRate
+#f35Rate
 {
     font-size: 20px;
     color: red;
@@ -477,7 +520,7 @@
     height: fit-content;
 }
 
-#fire
+#f36
 {
     position: absolute;
     height: 50px;
@@ -488,18 +531,18 @@
     transition: all 0.3s;
     font-size: 20px;
 }
-#fire:hover
+#f36:hover
 {
     background-color: rgb(175, 0, 0);
 }
-#fire:active
+#f36:active
 {
     height: 43px;
     width: 65px;
     left: 505px;
     top: 505px;
 }
-#fireCost
+#f36Cost
 {
     font-size: 20px;
     color: red;
@@ -509,7 +552,7 @@
     width: fit-content;
     height: fit-content;
 }
-#fireAmount
+#f36Amount
 {
     font-size: 20px;
     color: red;
@@ -519,7 +562,7 @@
     width: fit-content;
     height: fit-content;
 }
-#fireRate
+#f36Rate
 {
     font-size: 20px;
     color: red;
@@ -530,7 +573,7 @@
     height: fit-content;
 }
 
-#floor3
+#floor1
 {
     position: absolute;
     height: 50px;
@@ -541,11 +584,11 @@
     transition: all 0.3s;
     font-size: 20px;
 }
-#floor3:hover
+#floor1:hover
 {
     background-color: rgb(0, 75, 0);
 }
-#floor3:active
+#floor1:active
 {
     height: 43px;
     width: 65px;
